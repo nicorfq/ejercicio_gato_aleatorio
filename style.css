@@ -1,0 +1,17 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+#randomMichis {
+    display: flex;
+    flex-direction: column ;
+}
+
+#randomMichis article {
+    display: flex;
+    flex-direction: column ;
+}
+
+#randomMichis article img {
+    width: 100px;
+}
