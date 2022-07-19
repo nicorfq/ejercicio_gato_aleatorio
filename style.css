@@ -1,17 +1,57 @@
 body {
     font-family: 'Inter', sans-serif;
+    font-size: 18px;
 }
-
+/* 
 #randomMichis {
     display: flex;
     flex-direction: column ;
-}
+} */
 
 #randomMichis article {
-    display: flex;
-    flex-direction: column ;
+    /* display: flex;
+    flex-direction: column ; */
+    margin-top: 30px;
 }
 
-#randomMichis article img {
-    width: 100px;
+img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    align-self: end;
+    margin-top: 10px;
+    border:none;
+    cursor: pointer
+}
+
+.btn {
+    background-color: green;
+}
+.btn:hover {
+    background-color: rgb(0, 97, 0);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 300px;
+    justify-content: center;
+}
+
+.container article {
+    display: flex;
+    flex-direction: column;
+}
+
+.recargar {
+    text-align: center;
+}
+
+.recargar button {
+    background-color: blue;
 }

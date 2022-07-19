@@ -13,44 +13,66 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Gatos Apps</h1>
+    <h1>
+        Gatos Apps
+        <span class="material-symbols-outlined">
+            favorite
+        </span>
+        <span class="material-symbols-outlined">
+            pets
+        </span>
+    </h1>
     
     <span id="error"></span>
-    <span class="jam jam-backpack"></span>
-    <span class="material-symbols-outlined">
-        favorite
-        </span>
+    
     <section id="randomMichis">
-        <h2>Gatos aleatorios</h2>
+        <h2>Fotos de Gatos Random</h2>
+        <p>El primer gato doméstico era egipcio. Científicos han encontrado restos genéticos que prueban que los felinos fueron domesticados por agricultores del Cercano Oriente y Egipto hace 10.000 años.</p>
+        <div class="container">
+            <article>
+                <img id="img1" src="" alt="Foto gato aleatorio">
+                <button class="btn" id="btn1" onclick="saveFavouritesMichis()">Guardar gato en favoritos</button>
+            </article>
+    
+            <article>
+                <img id="img2" src="" alt="Foto gato aleatorio">
+                <button class="btn" id="btn2" onclick="saveFavouritesMichis()">Guardar gato en favoritos</button>
+            </article>
+    
+            <article>
+                <img id="img3" src="" alt="Foto gato aleatorio">
+                <button class="btn" id="btn3" onclick="saveFavouritesMichis()">Guardar gato en favoritos</button>
+            </article>
+        </div>
 
-        <article>
-            <img id="img1" src="" alt="Foto gato aleatorio">
-            <button id="btn1" onclick="saveFavouritesMichis()">Guardar gato en favoritos</button>
-        </article>
-
-        <article>
-            <img id="img2" src="" alt="Foto gato aleatorio">
-            <button id="btn2" onclick="saveFavouritesMichis()">Guardar gato en favoritos</button>
-        </article>
-
-        <article>
-            <img id="img3" src="" alt="Foto gato aleatorio">
-            <button id="btn3" onclick="saveFavouritesMichis()">Guardar gato en favoritos</button>
-        </article>
-
+    </section>
+    
+    <section class="recargar">
         <p>Si ninguno te gustó, haz click para recargar</p>
         <button onclick="loadRandomMichis()">Recargar</button>
     </section>
 
-    <section id="favouriteMichis">
-        <h2>Gatos Favoritos</h2>
+    <section id="uploadingMichi">
+        <h2>Sube la foto de tu gato</h2>
 
-        <article>
-            <img id="img1" width="150" alt="Foto gato aleatorio">
-            <button>Sacar al gato de favoritos</button>
-        </article>
+        <form id="uploadingForm">
+            <input id="file" type="file" name="file" />
+            <button class="btn" type="button" onclick="uploadMichiPhoto()">Subir foto de Gatos</button>
+        </form>
+    </section>
+
+    <h2>Gatos Favoritosss</h2>
+    <section class="container">
+
+        <div id="favouriteMichis">
+            <!-- <article>
+                <img id="img1" alt="Foto gato aleatorio">
+                <button class="btn" class="btn">Sacar al gato de favoritos</button>
+            </article> -->
+        </div>
 
     </section>
+
 
     <script src="./main.js"></script>
 </body>

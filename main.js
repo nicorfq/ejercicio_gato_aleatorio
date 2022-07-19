@@ -1,8 +1,7 @@
-const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=3&api_key=e793d7a2-bb9e-4004-948e-55903014c199';
-
-const API_URL_FAVOURITES = 'https://api.thecatapi.com/v1/favourites?api_key=e793d7a2-bb9e-4004-948e-55903014c199';
-
-const API_URL_FAVOURITES_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}?api_key=e793d7a2-bb9e-4004-948e-55903014c199`;
+const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=3';
+const API_URL_FAVOURITES = 'https://api.thecatapi.com/v1/favourites';
+const API_URL_FAVOURITES_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}`;
+const API_URL_UPLOAD = `https://api.thecatapi.com/v1/images/upload`;
 
 const spanError = document.getElementById('error');
 
@@ -36,7 +35,12 @@ async function loadRandomMichis() {
 }
 
 async function loadFavouritesMichis() {
-  const res = await fetch(API_URL_FAVOURITES);
+  const res = await fetch(API_URL_FAVOURITES, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': 'e793d7a2-bb9e-4004-948e-55903014c199',
+    }
+  });
   const data = await res.json();       
   console.log('Favoritos') 
   console.log(data)
@@ -47,7 +51,7 @@ async function loadFavouritesMichis() {
     const section = document.getElementById('favouriteMichis')
     section.innerHTML = "";
     const h2 = document.createElement('h2');
-    const h2Text = document.createTextNode('Michis favoritos');
+    const h2Text = document.createTextNode('Gatos Favoritos');
     h2.appendChild(h2Text);
     section.appendChild(h2);
 
@@ -72,6 +76,7 @@ async function saveFavouritesMichis(id) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-API-KEY' : 'e793d7a2-bb9e-4004-948e-55903014c199'
     },
     body: JSON.stringify({
       image_id: id
@@ -92,7 +97,10 @@ async function saveFavouritesMichis(id) {
 
 async function deleteFavouriteMichi(id) {
   const res = await fetch(API_URL_FAVOURITES_DELETE(id), {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      'X-API-KEY' : 'e793d7a2-bb9e-4004-948e-55903014c199'
+    }
   });
   const data = await res.json();
 
@@ -100,9 +108,36 @@ async function deleteFavouriteMichi(id) {
     spanError.innerHTML = "Hubo un error: " + res.status + data.message;
   } else {
     console.log('Gato eliminado de Favoritos')
+    loadFavouritesMichis();
   }
 }
 
+async function uploadMichiPhoto() {
+  const form = document.getElementById('uploadingForm')
+  const formData = new FormData(form);
+
+  console.log(formData.get('file'));
+
+  const res = await fetch(API_URL_UPLOAD, {
+    method: 'POST',
+    headers: {
+      // 'Content-Type': 'multipart/form-data',
+      'X-API-KEY': 'e793d7a2-bb9e-4004-948e-55903014c199'
+    },
+    body: formData,
+  })
+  const data = await res.json();
+
+  if (res.status != 201) {
+    spanError.innerHTML = "Hubo un error: " + res.status + data.message;
+    console.log({data})
+  } else {
+    console.log('Foto de Gato subida con éxito')
+    console.log({data})
+    console.log(data.url)
+    saveFavouritesMichis(data.id)
+  }
+}
 
 loadRandomMichis();
 loadFavouritesMichis();
